@@ -1,0 +1,72 @@
+# Dart and Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+**/build/
+/coverage/
+**/coverage/
+**/doc/api/
+.flutter-telemetry/
+
+# Flutter generated files
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/ephemeral/
+**/android/.gradle/
+**/android/local.properties
+**/android/app/.cxx/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/linux/flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/.plugin_symlinks/
+
+# Android and Java build artifacts
+*.class
+*.apk
+*.aab
+*.jks
+*.keystore
+*.log
+.gradle/
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary and editor files
+*.swp
+*.swo
+*~
+.history/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Generated symbolication and obfuscation files
+app.*.symbols
+app.*.map.json
+
+# Xcode user-specific files
+**/ios/Runner.xcworkspace/xcuserdata/
+**/ios/Runner.xcodeproj/xcuserdata/
+**/macos/Runner.xcworkspace/xcuserdata/
+**/macos/Runner.xcodeproj/xcuserdata/
