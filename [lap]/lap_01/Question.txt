@@ -1,0 +1,56 @@
+EXERCISE 4 – REFLECTION QUESTIONS
+
+Tài liệu đối chiếu: Module 1 – Introduction to Flutter (Module1_Introduction_to_Flutter.pptx)
+
+1. Lệnh flutter doctor dùng để kiểm tra môi trường phát triển Flutter, bao gồm Flutter SDK, Android SDK, Android toolchain, trình biên dịch cho Windows, thiết bị kết nối và các công cụ liên quan. Nếu phát hiện thành phần bị thiếu hoặc cấu hình chưa đúng, lệnh sẽ hiển thị cảnh báo và hướng dẫn cách khắc phục.
+
+Vị trí trích dẫn trong slide:
+- Module 1, Slide 18 – Installing the Flutter SDK: yêu cầu xác minh cài đặt bằng Flutter doctor.
+- Module 1, Slide 26 – Summary: nhắc lại việc cài đặt Flutter SDK và kiểm tra cấu hình bằng flutter doctor.
+
+2. Trong cấu trúc dự án Flutter tiêu chuẩn, tệp lib/main.dart là entry point của ứng dụng. Khi ứng dụng khởi chạy, chương trình bắt đầu từ hàm main(), thường được dùng để gọi runApp():
+
+void main() {
+  runApp(const MyApp());
+}
+
+Vị trí trích dẫn trong slide:
+- Module 1, Slide 22 – Flutter Project Structure: nêu rõ lib/main.dart là app entry point và mô tả vai trò của thư mục lib/.
+
+3. HOT RELOAD VÀ HOT RESTART
+
+- Hot Reload: Nạp các thay đổi của mã nguồn vào ứng dụng đang chạy và dựng lại những phần giao diện cần thiết mà thường không làm mất state hiện tại. Tính năng này phù hợp khi chỉnh sửa giao diện, văn bản, màu sắc hoặc các thay đổi nhỏ trong phương thức build().
+- Hot Restart: Khởi động lại ứng dụng Dart từ đầu và xóa state hiện tại trong bộ nhớ. Tính năng này phù hợp khi thay đổi logic khởi tạo, biến toàn cục hoặc những thay đổi mà Hot Reload không thể áp dụng đầy đủ.
+
+Vị trí trích dẫn trong slide:
+- Module 1, Slide 4 – Why Flutter?: liệt kê Hot Reload / Hot Restart là một tính năng giúp tăng tốc độ phát triển.
+- Slide 4 chỉ nêu tên hai tính năng, không giải thích chi tiết cơ chế giữ hoặc xóa state. Phần phân tích ở trên là giải thích mở rộng.
+
+4. Hàm runApp() nhận một widget gốc (root widget) làm đối số và gắn widget đó vào hệ thống Flutter. Từ widget gốc, framework gọi các phương thức build() để tạo ra các widget con, hình thành widget tree. Sau đó, Flutter chuyển widget tree thành render tree, thực hiện layout, compositing và kết xuất khung hình lên màn hình.
+
+Có thể tóm tắt quy trình như sau:
+
+runApp() -> Widget Tree -> Render Tree -> Composited Scene -> GPU Rendering
+
+Vị trí trích dẫn trong slide:
+- Module 1, Slide 10 – Flutter Architecture Overview: trình bày luồng Widget Tree -> Render Tree -> Composited Scene -> GPU Rendering và ba lớp kiến trúc Framework, Engine, Embedder.
+- Module 1, Slide 11 – Framework Layer: giải thích vai trò của widget và nhấn mạnh rằng mọi thành phần trong Flutter đều là widget.
+- Không có slide nào mô tả trực tiếp nội bộ của runApp() như WidgetsBinding hoặc RenderView; phần đó là giải thích bổ sung dựa trên cơ chế hoạt động của Flutter.
+
+5. Flutter hỗ trợ phát triển đa nền tảng nhờ kiến trúc gồm ba lớp chính:
+
+- Framework: Viết bằng Dart, cung cấp widget, hệ thống layout, rendering và các thư viện như Material và Cupertino.
+- Engine: Viết chủ yếu bằng C++, sử dụng Skia hoặc Impeller để kết xuất giao diện, xử lý văn bản, layout và tăng tốc GPU.
+- Embedder: Kết nối Flutter với từng nền tảng, xử lý input, vòng đời ứng dụng, cửa sổ và các dịch vụ hệ điều hành.
+
+Nhờ kiến trúc này, lập trình viên có thể dùng một codebase Dart để xây dựng ứng dụng cho Android, iOS, Windows, macOS, Linux và Web. Flutter tự kết xuất phần lớn giao diện thông qua engine riêng, giúp giao diện nhất quán giữa các nền tảng. Khi cần truy cập chức năng đặc thù của hệ điều hành, ứng dụng có thể sử dụng Platform Channels để giao tiếp với mã native.
+
+Trên Android, iOS và desktop, Dart có thể được biên dịch thành mã máy native. Riêng Flutter Web, mã Dart được biên dịch để chạy trên nền tảng web, vì vậy không nên mô tả mọi nền tảng đều tạo ra mã máy ARM/x86.
+
+Vị trí trích dẫn trong slide:
+- Module 1, Slide 3 – What is Flutter?: giới thiệu Flutter là bộ công cụ xây dựng ứng dụng từ một codebase, liệt kê các nền tảng được hỗ trợ và đề cập rendering engine Skia.
+- Module 1, Slide 6 – When Is Flutter a Good Choice?: đề cập ứng dụng đa nền tảng với UI và logic dùng chung.
+- Module 1, Slide 7 – Flutter with Native Integration: giải thích Flutter xử lý UI/business logic, còn mã native xử lý chức năng đặc thù; hai phần giao tiếp qua Platform Channels.
+- Module 1, Slide 10 – Flutter Architecture Overview: trình bày ba lớp Framework, Engine và Embedder.
+- Module 1, Slide 12 – Engine Layer / Embedder Layer: giải thích engine dùng Skia, tăng tốc GPU và tích hợp với nền tảng.
+- Module 1, Slide 13 – Benefits of Flutter: trình bày hiệu năng, tính nhất quán và so sánh Flutter với React Native.
