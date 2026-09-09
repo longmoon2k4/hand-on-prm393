@@ -60,19 +60,13 @@ void main() {
   // Kiểu đặc biệt là Record
   var person = (name: 'Long nè', age: 20);
 
-
   // Hàm
-  ({bool success, String message}) login(
-    String username, 
-    String password
-    ) => (success: true, message: 'Đăng nhập thành công');
-  
+  ({bool success, String message}) login(String username, String password) =>
+      (success: true, message: 'Đăng nhập thành công');
+
   var result = login('long', '123456');
 
   String emoji = '😀';
-  
-
-
 
   String _text = 'Hello, Dart!';
 
