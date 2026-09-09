@@ -4,6 +4,10 @@
 //      ___) | | | | | | | |  __/ | |_| |  __/\ V /
 //     |____/|_| |_| |_|_|_|\___| |____/ \___| \_/
 //
+
+import 'models/car.dart';
+import 'models/electric_car.dart';
+
 void main() {
   void exercise_01() {
     print('--------------------Bài tập 1--------------------');
@@ -82,6 +86,7 @@ void main() {
     print('Map sau khi xóa 1 giá trị: $position');
     print('-------------------------------------------------');
   }
+  // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
   void exercise_03() {
     print('--------------------Bài tập 3--------------------');
@@ -136,9 +141,31 @@ void main() {
     int calculateWithArrow(int a, int b) => a + b;
     print('Kết quả dùng arrow function: ${calculateWithArrow(10, 20)}');
     print('-------------------------------------------------');
-  }
 
-  exercise_01();
-  exercise_02();
-  exercise_03();
+    //
+  }
+  // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+  void exercise_04() {
+    print('--------------------Bài tập 4--------------------');
+
+    final exampleCar = Car.fromHonda();
+
+    print(exampleCar.name);
+    print(exampleCar.brand);
+
+    exampleCar.drive();
+
+    final electricCar = ElectricCar(name: 'Xe điện', brand: 'Tesla', battery: 20);
+    
+    electricCar.drive();
+
+    print('-------------------------------------------------');
+  }
+  // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+  // exercise_01();
+  // exercise_02();
+  // exercise_03();
+  exercise_04();
 }
