@@ -10,7 +10,7 @@ import 'dart:math';
 import 'models/car.dart';
 import 'models/electric_car.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   void exercise_01() {
     print('--------------------Bài tập 1--------------------');
     String playerName = 'Smile';
@@ -171,45 +171,50 @@ Future<void> main() async{
 
   // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
   const api = 'https://smiledev.id.vn';
-  Future<String> getNameDeveloper(String api) async{
+  Future<String> getNameDeveloper(String api) async {
     print('Đang lấy tên của dev');
     await Future.delayed(const Duration(seconds: 2));
-    final String? dumpName ;
+    String? dumpName;
     dumpName = null;
+
     print('Đây là dumpName với giá trị có thể null: $dumpName');
     print('Đây là giá trị mặc định của dumpName: ${dumpName ?? 'Vũ Long'}');
+    dumpName = 'Vũ Long';
+    print('Đây là độ dài của biến dumpName có thể null: ${dumpName!.length}');
     print('Đã lấy được tên của dev');
     return 'Smile';
   }
 
-  Stream<String> radioMessage() async*{
+  Stream<String> radioMessage() async* {
     yield 'Hello, đây là tin nhắn đầu tiên';
     await Future.delayed(const Duration(seconds: 1));
     yield 'Đây là tin nhắn thứ 2';
     await Future.delayed(const Duration(seconds: 1));
   }
 
-  Future<void> exercise_05() async{
+  Future<void> exercise_05() async {
     print('--------------------Bài tập 5--------------------');
 
-    Future<void> holdOn() async{
+    Future<void> holdOn() async {
       print('Bắt đầu');
       final nameDev = await getNameDeveloper(api);
       print(nameDev);
-      
     }
 
     await holdOn();
 
-    await for (final message in radioMessage()) {
-      print(message);
-    };
+    // await for (final message in radioMessage()) {
+    //   print(message);
+
+    radioMessage().listen((value) {
+      print('Nhận được tin nhắn mới: $value');
+    });
     print('-------------------------------------------------');
   }
-  
-  // exercise_01();
-  // exercise_02();
-  // exercise_03();
-  // exercise_04();
+
+  exercise_01();
+  exercise_02();
+  exercise_03();
+  exercise_04();
   await exercise_05();
 }
