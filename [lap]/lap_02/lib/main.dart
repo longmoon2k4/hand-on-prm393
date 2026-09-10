@@ -174,9 +174,21 @@ Future<void> main() async{
   Future<String> getNameDeveloper(String api) async{
     print('Đang lấy tên của dev');
     await Future.delayed(const Duration(seconds: 2));
+    final String? dumpName ;
+    dumpName = null;
+    print('Đây là dumpName với giá trị có thể null: $dumpName');
+    print('Đây là giá trị mặc định của dumpName: ${dumpName ?? 'Vũ Long'}');
     print('Đã lấy được tên của dev');
     return 'Smile';
   }
+
+  Stream<String> radioMessage() async*{
+    yield 'Hello, đây là tin nhắn đầu tiên';
+    await Future.delayed(const Duration(seconds: 1));
+    yield 'Đây là tin nhắn thứ 2';
+    await Future.delayed(const Duration(seconds: 1));
+  }
+
   Future<void> exercise_05() async{
     print('--------------------Bài tập 5--------------------');
 
@@ -184,9 +196,14 @@ Future<void> main() async{
       print('Bắt đầu');
       final nameDev = await getNameDeveloper(api);
       print(nameDev);
+      
     }
 
     await holdOn();
+
+    await for (final message in radioMessage()) {
+      print(message);
+    };
     print('-------------------------------------------------');
   }
   
