@@ -5,10 +5,12 @@
 //     |____/|_| |_| |_|_|_|\___| |____/ \___| \_/
 //
 
+import 'dart:math';
+
 import 'models/car.dart';
 import 'models/electric_car.dart';
 
-void main() {
+Future<void> main() async{
   void exercise_01() {
     print('--------------------Bài tập 1--------------------');
     String playerName = 'Smile';
@@ -156,16 +158,41 @@ void main() {
 
     exampleCar.drive();
 
-    final electricCar = ElectricCar(name: 'Xe điện', brand: 'Tesla', battery: 20);
-    
+    final electricCar = ElectricCar(
+      name: 'Xe điện',
+      brand: 'Tesla',
+      battery: 20,
+    );
+
     electricCar.drive();
 
     print('-------------------------------------------------');
   }
-  // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
+  // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  const api = 'https://smiledev.id.vn';
+  Future<String> getNameDeveloper(String api) async{
+    print('Đang lấy tên của dev');
+    await Future.delayed(const Duration(seconds: 2));
+    print('Đã lấy được tên của dev');
+    return 'Smile';
+  }
+  Future<void> exercise_05() async{
+    print('--------------------Bài tập 5--------------------');
+
+    Future<void> holdOn() async{
+      print('Bắt đầu');
+      final nameDev = await getNameDeveloper(api);
+      print(nameDev);
+    }
+
+    await holdOn();
+    print('-------------------------------------------------');
+  }
+  
   // exercise_01();
   // exercise_02();
   // exercise_03();
-  exercise_04();
+  // exercise_04();
+  await exercise_05();
 }
