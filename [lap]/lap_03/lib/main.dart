@@ -58,15 +58,29 @@ Future<void> main() async {
   // Mircro task  queue -> event queue
   // xử lý hết micro -> Gọi 1 thằng trong event ra -> Kiểm tra micro có gì mới không ----có---> xử lý micro
   //                                    |<---------------------không---------------<|
+
   print('[1]. Bước 1');
-  Future(() {
-    print('[5]. Bước 5');
-    print('-------------------------------------------------');
-  });
+  print('[2]. Bước 2');
+
   scheduleMicrotask(() {
     print('[3]. Bước 3');
     print('[4]. Bước 4');
   });
-  print('[2]. Bước 2');
-  
+
+  await Future<void>.delayed(Duration.zero);
+  print('[5]. Bước 5');
+  print('-------------------------------------------------');
+
+  print('--------------------Bài tập 4--------------------');
+
+  final listNumber = Stream<int>.fromIterable([1, 2, 3, 4, 5]);
+  final squareNumber = listNumber
+      .map((number) => number * number)
+      .where((number) => number.isEven);
+
+  await for (final number in squareNumber) {
+    print('Nhận được giá trị $number');
+  }
+
+  print('-------------------------------------------------');
 }
