@@ -5,6 +5,8 @@
 //     |____/|_| |_| |_|_|_|\___| |____/ \___| \_/
 //
 
+import 'dart:async';
+
 import 'package:lap_03/models/product.dart';
 import 'package:lap_03/models/user.dart';
 import 'package:lap_03/repository/productRepository.dart';
@@ -21,11 +23,14 @@ Future<void> main() async {
 
   await repo.addProduct(Product(id: 1, name: 'Long', price: 20.56));
   await repo.addProduct(Product(id: 2, name: 'Smile', price: 104.4));
+  await Future.delayed(const Duration(seconds: 1));
   print('');
   print('Danh sách vật phẩm');
   final p = await repo.getAll();
   for (Product i in p) {
+    await Future.delayed(const Duration(seconds: 1));
     print(i);
+    await Future.delayed(const Duration(seconds: 1));
   }
 
   await toastMessgae.cancel();
@@ -38,8 +43,30 @@ Future<void> main() async {
   List<User> userList = await userRepo.getAllUser();
 
   for (var i in userList) {
+    await Future.delayed(const Duration(seconds: 1));
     print('${i.name} có email: ${i.email}');
+    await Future.delayed(const Duration(seconds: 1));
   }
 
   print('-------------------------------------------------');
+
+  print('--------------------Bài tập 3--------------------');
+  //Mindset của microtask and event queues
+
+  // Dart là ngôn ngữ single thread lên dart dùng cơ chế event loop (Xử lý các sự kiện)
+  // Event loop có 2 hàng đợi với trọng số ưu tiên khác nhau
+  // Mircro task  queue -> event queue
+  // xử lý hết micro -> Gọi 1 thằng trong event ra -> Kiểm tra micro có gì mới không ----có---> xử lý micro
+  //                                    |<---------------------không---------------<|
+  print('[1]. Bước 1');
+  Future(() {
+    print('[5]. Bước 5');
+    print('-------------------------------------------------');
+  });
+  scheduleMicrotask(() {
+    print('[3]. Bước 3');
+    print('[4]. Bước 4');
+  });
+  print('[2]. Bước 2');
+  
 }
