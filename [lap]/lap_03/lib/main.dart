@@ -7,6 +7,7 @@
 
 import 'dart:async';
 
+import 'package:lap_03/dontknow/setting.dart';
 import 'package:lap_03/models/product.dart';
 import 'package:lap_03/models/user.dart';
 import 'package:lap_03/repository/productRepository.dart';
@@ -73,14 +74,24 @@ Future<void> main() async {
 
   print('--------------------Bài tập 4--------------------');
 
-  final listNumber = Stream<int>.fromIterable([1, 2, 3, 4, 5]);
-  final squareNumber = listNumber
-      .map((number) => number * number)
-      .where((number) => number.isEven);
-
-  await for (final number in squareNumber) {
-    print('Nhận được giá trị $number');
-  }
-
+  final Stream<int> listNumber = Stream.fromIterable([1, 2, 3, 4, 5]);
+  final Stream<int> outNumber = listNumber
+    .where((e) => e % 2 == 0)
+    .map((e) => e * e);
+  
+  outNumber.listen(
+    (value) {
+      print('Giá trị mới: $value');
+    },
+    onDone: () => {print('Đã lấy hết danh sách')}
+  );
+    
+  await Future.delayed(Duration.zero);
+  print('-------------------------------------------------');
+  print('--------------------Bài tập 5--------------------');
+  var a = Setting(); // Nhà máy trả về _instance trong kho 
+  var b = Setting(); // Nhà máy lại trả về đúng _instance đó
+  print(identical(a, b));
+  
   print('-------------------------------------------------');
 }
