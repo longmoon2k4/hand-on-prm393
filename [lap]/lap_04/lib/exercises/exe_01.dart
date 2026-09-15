@@ -6,12 +6,11 @@
 //
 
 import 'package:flutter/material.dart';
-import 'mainMenu.dart';
-void main() {
-  runApp(MaterialApp(
-    home: MainMenu(),
-    debugShowCheckedModeBanner: false,
-  ));
 
-
+class Exercise01 extends StatelessWidget{
+  const Exercise01({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
 }
