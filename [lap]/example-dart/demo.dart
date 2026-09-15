@@ -70,6 +70,9 @@ void main() {
 
   String _text = 'Hello, Dart!';
 
+  String test = r'raw sstring \n  đâsjdsadsad';
+  print(test);
+
   // print(emoji.runes.length);
   // print(result.success);
   // print(result.message);

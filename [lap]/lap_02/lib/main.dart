@@ -203,12 +203,9 @@ Future<void> main() async {
 
     await holdOn();
 
-    // await for (final message in radioMessage()) {
-    //   print(message);
-
-    radioMessage().listen((value) {
-      print('Nhận được tin nhắn mới: $value');
-    });
+    await for (final message in radioMessage()) {
+      print('Nhận được tin nhắn mới: $message');
+    }
     print('-------------------------------------------------');
   }
 
