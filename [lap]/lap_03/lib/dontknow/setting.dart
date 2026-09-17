@@ -6,11 +6,13 @@
 //
 
 class Setting {
-  static final Setting _instance = Setting._internal();
-  Setting._internal();
+  String? theme;
+  static final Setting _instance = Setting._();
 
-  factory Setting(){
-    return _instance;
+  Setting._(){theme = 'Dark';}
+
+  factory setting_2(String _theme) {
+    _instance.theme = _theme;
+  return _instance;
   }
-
 }

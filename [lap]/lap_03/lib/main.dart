@@ -89,9 +89,10 @@ Future<void> main() async {
   await Future.delayed(Duration.zero);
   print('-------------------------------------------------');
   print('--------------------Bài tập 5--------------------');
-  var a = Setting(); // Nhà máy trả về _instance trong kho 
-  var b = Setting(); // Nhà máy lại trả về đúng _instance đó
-  print(identical(a, b));
-  
+  var a = Setting.setting_2('Light'); // Nhà máy trả về _instance trong kho 
+  var b = Setting.setting_2('Dart'); // Nhà máy lại trả về đúng _instance đó
+  // a.theme = 'Light';
+  // print(identical(a, b));
+  print(a.theme);
   print('-------------------------------------------------');
 }
