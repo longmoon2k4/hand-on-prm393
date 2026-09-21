@@ -6,10 +6,11 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:lap_04/mockdatademo/mockMenuItems.dart';
 import 'mainMenu.dart';
 void main() {
   runApp(MaterialApp(
-    home: MainMenu(),
+    home: MainMenu(menuItems: MocKMennuItems,),
     debugShowCheckedModeBanner: false,
   ));
 

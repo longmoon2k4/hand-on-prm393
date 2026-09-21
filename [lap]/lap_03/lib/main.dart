@@ -93,6 +93,7 @@ Future<void> main() async {
   var b = Setting.setting_2('Dart'); // Nhà máy lại trả về đúng _instance đó
   // a.theme = 'Light';
   // print(identical(a, b));
+  
   print(a.theme);
   print('-------------------------------------------------');
 }
