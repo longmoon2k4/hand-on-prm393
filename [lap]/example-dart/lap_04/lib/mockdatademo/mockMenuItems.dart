@@ -13,10 +13,10 @@ import 'package:lap_04/screens/screen_4.dart';
 import 'package:lap_04/screens/screen_5.dart';
 
 final List<Mock> MocKMennuItems = [
-  Mock(title: 'Exercise 1', screen: Screen1()),
-  Mock(title: 'Exercise 2', screen: Screen2()),
-  Mock(title: 'Exercise 3', screen: Screen3()),
-  Mock(title: 'Exercise 4', screen: Screen4()),
-  Mock(title: 'Exercise 5', screen: Screen5()),
+  Mock(title: 'Exercise 1 - Core Widgets', screen: Screen1()),
+  Mock(title: 'Exercise 2 - Input Controls', screen: Screen2()),
+  Mock(title: 'Exercise 3 - Layout Demo', screen: Screen3()),
+  Mock(title: 'Exercise 4 - App Structure & Theme', screen: Screen4()),
+  Mock(title: 'Exercise 5 - Common UI Fixes', screen: Screen5()),
 ];
 

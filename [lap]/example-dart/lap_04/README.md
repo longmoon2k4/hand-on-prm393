@@ -1,6 +1,6 @@
 # lap_04
 
-A new Flutter project.
+Lap 04
 
 ## Getting Started
 
