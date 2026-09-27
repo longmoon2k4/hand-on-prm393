@@ -18,6 +18,7 @@ class _Exercise2State extends State<Exercise2> {
   double _sliderValue = 25.0;
   bool _isEnable = false;
   String? _selectedValue = 'Image';
+  final List<String> _listResource = ['Image', 'Video', 'Sound'];
   DateTime? _selectedTime;
 
   @override
@@ -77,6 +78,128 @@ class _Exercise2State extends State<Exercise2> {
                         ),
                       ],
                     ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Active (Switch)',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Text('Are you hungry ?'),
+                        const Spacer(),
+                        Text('${_isEnable ? "Yes" : "No"} '),
+                        const Spacer(),
+                        Switch(
+                          value: _isEnable,
+                          onChanged: (value) {
+                            setState(() {
+                              _isEnable = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Genre (RadioListTile)',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    ..._listResource.map(
+                      (resource) => RadioListTile<String>(
+                        title: Text(resource),
+                        value: resource,
+                        groupValue: _selectedValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedValue = value;
+                          });
+                        },
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        'Selected: $_selectedValue',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Date Picker',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final DateTime? yob = await showDatePicker(
+                          context: context,
+                          initialDate: _selectedTime ?? DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                        if (yob != null) {
+                          setState(() {
+                            _selectedTime = yob;
+                          });
+                        }
+                      },
+
+                      child: const Text(
+                        'Open Date Picker',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    if (_selectedTime != null)
+                      Text(
+                        'Selected Date: ${_selectedTime!.day}/${_selectedTime!.month}/${_selectedTime!.year}',
+                      ),
                   ],
                 ),
               ),
