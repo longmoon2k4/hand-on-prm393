@@ -10,6 +10,7 @@ import 'package:lap_04/Screens/Exercise_2.dart';
 import 'package:lap_04/Screens/Exercise_3.dart';
 import 'package:lap_04/Screens/Exercise_4.dart';
 import 'package:lap_04/Screens/Exercise_5.dart';
+import 'package:lap_04/model/HumanDemo.dart';
 import 'package:lap_04/model/Screen.dart';
 
 final List<Screen> MenuCardDemo = [
@@ -23,7 +24,7 @@ final List<Screen> MenuCardDemo = [
     subtitle: '',
     screens: Exercise2(),
   ),
-  Screen(title: 'Exercise 3 - Layout Demo', subtitle: '', screens: Exercise3()),
+  Screen(title: 'Exercise 3 - Layout Demo', subtitle: '', screens: Exercise3(humans: HumanDemo)),
   Screen(
     title: 'Exercise 4 - App Structure & Theme',
     subtitle: '',
