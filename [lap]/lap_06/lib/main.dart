@@ -1,8 +1,9 @@
-import 'model/Genres.dart';
+import 'package:flutter/material.dart';
+import 'package:lap_06/screens/Home.dart';
 
 void main() {
-  List<Genre> movies = Genre.values;
-  List<String> titleList = movies.map((e) => e.value).toList();
-  print(titleList);
-
+  runApp(const MaterialApp(
+    home: Home(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
