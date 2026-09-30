@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lap_06/model/Genres.dart';
+import 'package:lap_06/model/Movie.dart';
 
 final List<Genre> listGenre = Genre.values;
 final List<String> canSelectGenre = listGenre.map((e) => e.value).toList();
@@ -17,6 +18,31 @@ class _HomeState extends State<Home> {
   String searchBox = '';
   String selectedSort = 'A-Z';
   List<Genre> selectedGenre = [];
+
+  List<Movie> get visibleMovies {
+    final result = allMovies.where((movie) {
+      final title = movie.title.toLowerCase();
+      final search = searchBox.toLowerCase();
+      final matchSearch = title.contains(search);
+      final matchGenre =
+          selectedGenre.isEmpty ||
+          movie.genres.any((genre) => selectedGenre.contains(genre));
+
+      return matchSearch && matchGenre;
+    }).toList();
+
+    if (selectedSort == 'A-Z') {
+      result.sort((a, b) => a.title.compareTo(b.title));
+    } else if (selectedSort == 'Z-A') {
+      result.sort((a, b) => b.title.compareTo(a.title));
+    } else if (selectedSort == 'Rating') {
+      result.sort((a, b) => b.rating.compareTo(a.rating));
+    } else if (selectedSort == 'Year') {
+      result.sort((a, b) => b.year.compareTo(a.year));
+    }
+
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +66,11 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Text(
+                'Find a Movie',
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16.0),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -130,10 +161,129 @@ class _HomeState extends State<Home> {
                   );
                 }).toList(),
               ),
+              const SizedBox(height: 16.0),
+              Row(
+                children: [
+                  Text(
+                    '${visibleMovies.length} phim được tìm thấy',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  if (searchBox.isNotEmpty || selectedGenre.isNotEmpty)
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          searchBox = '';
+                          selectedGenre.clear();
+                        });
+                      },
+                      child: const Text('Xóa bộ lọc'),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  if (visibleMovies.isEmpty) {
+                    return const Padding(
+                      padding: EdgeInsets.all(24.0),
+                      child: Center(
+                        child: Text('Không tìm thấy phim phù hợp.'),
+                      ),
+                    );
+                  }
+
+                  if (constraints.maxWidth >= 600) {
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: visibleMovies.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            childAspectRatio: 0.75,
+                          ),
+                      itemBuilder: (context, index) {
+                        return _movieCard(visibleMovies[index], true);
+                      },
+                    );
+                  }
+
+                  return Column(
+                    children: visibleMovies
+                        .map((movie) => _movieCard(movie, false))
+                        .toList(),
+                  );
+                },
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _movieCard(Movie movie, bool isWide) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: isWide
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Image.network(
+                      movie.posterUrl,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  _movieText(movie),
+                ],
+              )
+            : Row(
+                children: [
+                  Image.network(
+                    movie.posterUrl,
+                    width: 90,
+                    height: 120,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(width: 12.0),
+                  Expanded(child: _movieText(movie)),
+                ],
+              ),
+      ),
+    );
+  }
+
+  Widget _movieText(Movie movie) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          movie.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          '${movie.year} - ${movie.genres.map((genre) => genre.value).join(', ')}',
+        ),
+        const SizedBox(height: 4.0),
+        Row(
+          children: [
+            const Icon(Icons.star, size: 18, color: Colors.orange),
+            const SizedBox(width: 4.0),
+            Text(movie.rating.toString()),
+          ],
+        ),
+      ],
     );
   }
 }
